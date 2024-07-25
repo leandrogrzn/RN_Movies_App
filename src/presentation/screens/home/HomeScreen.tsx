@@ -18,11 +18,12 @@ export const HomeScreen = () => {
   return (
     <ScrollView>
       <View style={{ marginTop: top + 20, paddingBottom: 30 }}>
+
         {/* Principal */}
         <PosterCarousel movies={nowPlaying} />
 
         {/* Populares */}
-        <HorizontalCarousel movies={popular} title="Populares"/>
+        <HorizontalCarousel movies={popular} title="Populares" loadNextPage={ () => console.log('fin alcanzado')}/>
 
         {/* Toprated */}
         <HorizontalCarousel movies={topRated} title="Mejor calificadas"/>
