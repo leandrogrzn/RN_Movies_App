@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react"
-import { Movie } from "../../core/entities/movie.entity"
-import * as UseCases from '../../core/use-cases'
+import { useEffect, useState } from "react";
+import { Movie } from "../../core/entities/movie.entity";
+import * as UseCases from '../../core/use-cases';
 import { movieDBFetcher } from "../../config/adapters/movieDB.adapter";
+
+let papularPageNumber = 1;
 
 export const useMovies = () => {
   
@@ -53,5 +55,15 @@ export const useMovies = () => {
     popular,
     topRated,
     upcoming,
-  }
-}
+
+    //Methods
+    popularNextPage: async() => {
+      papularPageNumber++;
+      const popularMovies = await UseCases.moviesPopularUseCase( movieDBFetcher, {
+        page: papularPageNumber,
+      } );
+
+      setPopular( prev => [...prev, ...popularMovies ]);
+    }
+  };
+};
